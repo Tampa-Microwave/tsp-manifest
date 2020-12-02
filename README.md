@@ -1,3 +1,74 @@
+# Tampa Microwave Yocto (Timmy!) Manifest
+
+This repository contains the manifest files for Tampa Microwaves' Yocto distribution. It is a fork of Digi Embedded's Yocto distribution and their entire README is included at the end of this document.
+
+## Installation
+
+### QUICK
+
+If you're on a new machine, the following command will install system dependencies, download the sources, and setup an initial build directory. You'll need your `sudo` password and any ssh keys required for accessing Tampa Microwave private GitHub repositories.
+
+```shell
+source <(curl -fsSL https://raw.githubusercontent.com/sr105-tm/tm-manifest/zeus/bootstrap.sh)
+```
+
+### Google repo tool
+
+Download Google's repo tool to a directory within your path and add execution
+permissions. Repo is a tool for downloading many different source repositories
+and arranging them locally. All of the details are defined in an XML manifest
+file found in its own repo, this one.
+
+```shell
+sudo curl -o /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo
+sudo chmod a+x /usr/local/bin/repo
+```
+
+### Download the manifest sources
+
+Use the repo tool to download and install of the sources needed for our
+distribution. The default manifest file is set to perform shallow clones of
+upstream sources to save space. Choose a single, semi-permanent place to
+download the sources. You'll do your builds in (optionally) separate build
+directories.
+
+```shell
+mkdir -p /path/to/tm-3.0
+cd /path/to/tm-3.0
+repo init -u https://github.com/sr105-tm/tm-manifest -b zeus
+repo sync
+```
+
+### Create a Build Directory
+
+Now, create an initial build directory as detailed in the README file in the
+root level of the downloaded sources. It is reproduced here:
+
+```shell
+mkdir -p /path/to/build/ccimx6ulsbc
+cd /path/to/build/ccimx6ulsbc
+. /path/to/tm-3.0/sources/meta-tm-sw/conf/tm-env
+```
+
+This will create a symbolic link to the `tm-env` file and initialize a build
+configuration in your new build directory.
+
+### Build an Image
+
+You will need to source the `tm-env` file anytime you open a new terminal.
+
+```shell
+. /path/to/build/ccimx6ulsbc/tm-env
+# You are now inside /path/to/build/ccimx6ulsbc and the environment is initialized for
+# building.
+bitbake dey-image-tsp
+```
+
+This will take about 3 hours for the first build. Future builds will only build
+changes. If all goes well, the output is in `/path/to/build/ccimx6ulsbc/tmp/deploy/images`.
+
+The original Digi content of this file is included below:
+
 Digi Embedded Yocto (DEY) manifest
 ==================================
 
