@@ -8,8 +8,23 @@ This repository contains the manifest files for Tampa Microwaves' Yocto distribu
 
 If you're on a new machine, the following command will install system dependencies, download the sources, and setup an initial build directory. You'll need your `sudo` password and any ssh keys required for accessing Tampa Microwave private GitHub repositories.
 
+#### ssh keys
+
+You need ssh access to download the Tampa Microwave specific repositories. You need to do the following steps:
+
+* Create an ssh key pair
+* Create a github account
+* Add your public ssh key to your github account
+* Run ssh-agent with your key:
+    eval `ssh-agent -s`
+    ssh-add
+
+#### Run the bootstrap script
+
+This script should do everything up to kicking off the build.
+
 ```shell
-source <(curl -fsSL https://raw.githubusercontent.com/sr105-tm/tm-manifest/zeus/bootstrap.sh)
+bash -e <(curl -fsSL https://raw.githubusercontent.com/Tampa-Microwave/tm-manifest/zeus/bootstrap.sh)
 ```
 
 ### Google repo tool
@@ -35,7 +50,7 @@ directories.
 ```shell
 mkdir -p /path/to/tm-3.0
 cd /path/to/tm-3.0
-repo init -u https://github.com/sr105-tm/tm-manifest -b zeus
+repo init -u https://github.com/Tampa-Microwave/tm-manifest -b zeus
 repo sync
 ```
 
@@ -47,7 +62,7 @@ root level of the downloaded sources. It is reproduced here:
 ```shell
 mkdir -p /path/to/build/ccimx6ulsbc
 cd /path/to/build/ccimx6ulsbc
-. /path/to/tm-3.0/sources/meta-tm-sw/conf/tm-env
+. /path/to/tm-3.0/sources/meta-tm/conf/tm-env
 ```
 
 This will create a symbolic link to the `tm-env` file and initialize a build
