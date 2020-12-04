@@ -16,6 +16,7 @@ You need ssh access to download the Tampa Microwave specific repositories. You n
 * Create a github account
 * Add your public ssh key to your github account
 * Run ssh-agent with your key:
+
     eval `ssh-agent -s`
     ssh-add
 
