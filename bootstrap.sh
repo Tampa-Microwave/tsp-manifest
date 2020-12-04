@@ -1,59 +1,120 @@
 #!/bin/bash -e
 
+(return 0 2>/dev/null) && \
+	printf "Don't source this script. Run it: \n\tbash -e ${BASH_SOURCE}\n" && \
+	return 0 || \
+	:
+
 # You'll need your sudo password and any ssh keys required by the repos inside
 # the manifest file.
 
-BUILD_PACKAGES="\
-  build-essential \
-  chrpath \
-  cu \
-  diffstat \
-  g++-multilib \
-  gawk \
-  gcc-multilib \
-  git-core \
-  libsdl1.2-dev \
-  minicom \
-  socat \
-  texinfo \
-  unzip \
-  wget \
-  xterm \
-"
-sudo apt install -y ${BUILD_PACKAGES}
+install_build_packages() {
+    BUILD_PACKAGES="\
+        build-essential \
+        chrpath \
+        cu \
+        diffstat \
+        g++-multilib \
+        gawk \
+        gcc-multilib \
+        git-core \
+        libsdl1.2-dev \
+        minicom \
+        socat \
+        texinfo \
+        unzip \
+        wget \
+        xterm \
+    "
+    sudo apt install -y ${BUILD_PACKAGES}
+}
 
-if ! which repo >/dev/null 2>&1; then
-    printf "Installing Google repo tool...\n"
-    sudo curl -o /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo
-    sudo chmod a+x /usr/local/bin/repo
-fi
+check_ssh_key_loaded() {
+    # User must have loaded an ssh key that works with github
+    if ! ssh-add -l >/dev/null 2>&1; then
+        printf "You must start an ssh-agent with one key that works with github.\n"
+        printf '\teval `ssh-agent -s`\n'
+        printf '\tssh-add\n'
+	return 1
+    fi
+}
 
-if ! git config --global user.name >/dev/null 2>&1; then
-    read -ep "Name for git commits (e.g. Joe User): " GIT_NAME
-    git config --global user.name "${GIT_NAME}"
-fi
-if ! git config --global user.email >/dev/null 2>&1; then
-    read -ep "E-mail address for git commits (e.g. joe.user@domain.com): " GIT_EMAIL
-    git config --global user.email "${GIT_EMAIL}"
-fi
-if ! git config --global color.ui >/dev/null 2>&1; then
-    git config --global color.ui auto
-fi
+ensure_a_python_exists() {
+    # repo needs a "python" executable. some new systems don't have one
+    if ! which python >/dev/null 2>&1; then
+        PYTHON=$(which python3 || which python2)
+        if [ "$PYTHON" == "" ]; then
+            printf "Failed to find python, python3, or python2\n"
+            return 1
+        fi
+        printf "Creating symlink: /usr/local/bin/python => ${PYTHON}\n"
+        ln -s "${PYTHON}" /usr/local/bin/python
+    fi
+}
+
+install_github_ssh_key() {
+    if ! grep -qE '^github\.com ssh-rsa ' ~/.ssh/known_hosts >/dev/null 2>&1; then
+        mkdir -p ~/.ssh
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        # Just in case we created the file and the directory
+	chmod 700 ~/.ssh
+	chmod 600 ~/.ssh/known_hosts
+    fi
+}
+
+install_repo() {
+    if ! which repo >/dev/null 2>&1; then
+        printf "Installing Google repo tool...\n"
+        sudo curl -o /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo
+        sudo chmod a+x /usr/local/bin/repo
+    fi
+}
+
+ensure_git_user_exists() {
+    if ! git config --global user.name >/dev/null 2>&1; then
+        read -ep "Name for git commits (e.g. Joe User): " GIT_NAME
+        git config --global user.name "${GIT_NAME}"
+    fi
+    if ! git config --global user.email >/dev/null 2>&1; then
+        read -ep "E-mail address for git commits (e.g. joe.user@domain.com): " GIT_EMAIL
+        git config --global user.email "${GIT_EMAIL}"
+    fi
+    if ! git config --global color.ui >/dev/null 2>&1; then
+        git config --global color.ui auto
+    fi
+}
 
 SOURCE_DIR=tm-3.0
 
-mkdir ${SOURCE_DIR}
-pushd ${SOURCE_DIR}
-{
-    repo init -u https://github.com/sr105-tm/tm-manifest.git -b zeus
-    repo sync
-    popd
+download_sources() {
+    mkdir -p ${SOURCE_DIR}
+    pushd ${SOURCE_DIR} >/dev/null 2>&1
+    {
+        repo init -u https://github.com/sr105-tm/tm-manifest.git -b zeus
+        repo sync
+        popd >/dev/null 2>&1
+    }
 }
 
-mkdir -p build/ccimx6ulsbc
-# no pushd/popd because we want to leave the user here
-cd build/ccimx6ulsbc
-source ../../${SOURCE_DIR}/sources/meta-tm-sw/conf/tm-env
+create_build_directory() {
+    mkdir -p build/ccimx6ulsbc
+    pushd build/ccimx6ulsbc >/dev/null 2>&1
+    {
+        echo
+        echo
+        source ../../${SOURCE_DIR}/sources/meta-tm/conf/tm-env
+        popd >/dev/null 2>&1
+    }
+}
+
+install_build_packages
+check_ssh_key_loaded
+ensure_a_python_exists
+install_github_ssh_key
+install_repo
+ensure_git_user_exists
+download_sources
+create_build_directory
 
 # Local Variables:
 # flyspell-mode: nil
