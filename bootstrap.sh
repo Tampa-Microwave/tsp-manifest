@@ -102,9 +102,13 @@ create_build_directory() {
     {
         echo
         echo
-        source ../../${SOURCE_DIR}/sources/meta-tm/conf/tm-env
+        source ../../${SOURCE_DIR}/sources/meta-tm/conf/tm-env >/dev/null
         popd >/dev/null 2>&1
     }
+}
+
+tell_next_steps() {
+    printf "\n\nNow run this command:\n\tsource build/ccimx6ulsbc/tm-env\n\n"
 }
 
 install_build_packages
@@ -115,6 +119,7 @@ install_repo
 ensure_git_user_exists
 download_sources
 create_build_directory
+tell_next_steps
 
 # Local Variables:
 # flyspell-mode: nil
