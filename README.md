@@ -2,13 +2,11 @@
 
 This repository contains the manifest files for Tampa Microwaves' Yocto distribution. It is a fork of Digi Embedded's Yocto distribution and their entire README is included at the end of this document.
 
-## Installation
-
-### QUICK
+## Quick Installation
 
 If you're on a new machine, the following command will install system dependencies, download the sources, and setup an initial build directory. You'll need your `sudo` password and any ssh keys required for accessing Tampa Microwave private GitHub repositories.
 
-#### ssh keys
+### ssh keys
 
 You need ssh access to download the Tampa Microwave specific repositories. You need to do the following steps:
 
@@ -20,13 +18,16 @@ You need ssh access to download the Tampa Microwave specific repositories. You n
         eval `ssh-agent -s`
         ssh-add
 
-#### Run the bootstrap script
+### Run the bootstrap script
 
 This script should do everything up to kicking off the build.
 
 ```shell
 bash -e <(curl -fsSL https://raw.githubusercontent.com/Tampa-Microwave/tm-manifest/zeus/bootstrap.sh)
 ```
+
+## Detailed Installation
+This is the same as the quick installation except you perform all of the steps manually.
 
 ### Google repo tool
 
