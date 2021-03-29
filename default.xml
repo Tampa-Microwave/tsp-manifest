@@ -10,7 +10,6 @@
   <remote name="yocto" fetch="git://git.yoctoproject.org"/>
 
   <project name="meta-digi.git" path="sources/meta-digi" remote="digi" revision="zeus">
-    <copyfile src="sdk/mkproject.sh" dest="mkproject.sh"/>
   </project>
   <project name="meta-freescale.git" path="sources/meta-freescale" remote="yocto" revision="zeus"/>
   <project name="meta-fsl-demos.git" path="sources/meta-fsl-demos" remote="fsl"   revision="zeus"/>
