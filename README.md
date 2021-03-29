@@ -53,7 +53,7 @@ directories.
 ```shell
 mkdir -p /path/to/tm-3.0
 cd /path/to/tm-3.0
-repo init -u https://github.com/Tampa-Microwave/tm-manifest -b zeus
+repo init -v -u https://github.com/Tampa-Microwave/tm-manifest -b zeus -m tsp.xml --depth=1
 repo sync
 ```
 

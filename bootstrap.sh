@@ -90,7 +90,7 @@ download_sources() {
     mkdir -p ${SOURCE_DIR}
     pushd ${SOURCE_DIR} >/dev/null 2>&1
     {
-        repo init -u https://github.com/sr105-tm/tm-manifest.git -b zeus
+        repo init -v -u https://github.com/Tampa-Microwave/tm-manifest -b zeus -m tsp.xml --depth=1
         repo sync
         popd >/dev/null 2>&1
     }

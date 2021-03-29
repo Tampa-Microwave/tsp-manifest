@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <default sync-j="4" revision="zeus" sync-c="true"/>
+  <include name="default.xml"/>
 
   <remote name="tm"    fetch="ssh://git@github.com/Tampa-Microwave"/>
-  <remote name="digi"  fetch="git://github.com/digi-embedded"/>
-  <remote name="fsl"   fetch="git://github.com/Freescale"/>
-  <remote name="qt5"   fetch="git://github.com/meta-qt5"/>
-  <remote name="swu"   fetch="git://github.com/sbabic"/>
-  <remote name="oe"    fetch="git://git.openembedded.org"/>
-  <remote name="yocto" fetch="git://git.yoctoproject.org"/>
 
   <project name="meta-tm.git"        path="sources/meta-tm"        remote="tm" >
       <linkfile src="conf/README.md" dest="README.md"/>
   </project>
-  <project name="meta-digi.git"         path="sources/meta-digi"         remote="digi"  clone-depth="1" />
-  <project name="meta-freescale.git"    path="sources/meta-freescale"    remote="yocto" clone-depth="1" />
-  <project name="meta-fsl-demos.git"    path="sources/meta-fsl-demos"    remote="fsl"   clone-depth="1" />
-  <project name="meta-openembedded.git" path="sources/meta-openembedded" remote="oe"    clone-depth="1" />
-  <project name="meta-qt5.git"          path="sources/meta-qt5"          remote="qt5"   clone-depth="1" />
-  <project name="meta-swupdate.git"     path="sources/meta-swupdate"     remote="swu"   clone-depth="1" revision="8ad6a75e1778cdda671b3d6aea2a9692613020ec" />
-  <project name="poky.git"              path="sources/poky"              remote="yocto" clone-depth="1" />
+
+  <extend-project name="meta-swupdate.git" revision="8ad6a75e1778cdda671b3d6aea2a9692613020ec"/>
 </manifest>
