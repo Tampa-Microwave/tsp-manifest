@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+  <!-- https://gerrit.googlesource.com/git-repo/+/HEAD/docs/manifest-format.md -->
+  <!-- https://gerrit.googlesource.com/git-repo/ -->
   <include name="default.xml"/>
 
   <remote name="tm"    fetch="ssh://git@github.com/Tampa-Microwave"/>
