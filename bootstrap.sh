@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
 (return 0 2>/dev/null) && \
-	printf "Don't source this script. Run it: \n\tbash -e ${BASH_SOURCE}\n" && \
-	return 0 || \
-	:
+    printf "Don't source this script. Run it: \n\tbash -e ${BASH_SOURCE}\n" && \
+    return 0 || \
+    :
 
 # You'll need your sudo password and any ssh keys required by the repos inside
 # the manifest file.
@@ -35,7 +35,7 @@ check_ssh_key_loaded() {
         printf "You must start an ssh-agent with one key that works with github.\n"
         printf '\teval `ssh-agent -s`\n'
         printf '\tssh-add\n'
-	return 1
+        return 1
     fi
 }
 
@@ -57,8 +57,8 @@ install_github_ssh_key() {
         mkdir -p ~/.ssh
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         # Just in case we created the file and the directory
-	chmod 700 ~/.ssh
-	chmod 600 ~/.ssh/known_hosts
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/known_hosts
     fi
 }
 
