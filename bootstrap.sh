@@ -35,6 +35,7 @@ check_ssh_key_loaded() {
         printf "You must start an ssh-agent with one key that works with github.\n"
         printf '\teval `ssh-agent -s`\n'
         printf '\tssh-add\n'
+        printf "Run ssh-add -l to see that you have a key loaded.\n"
         return 1
     fi
 }
