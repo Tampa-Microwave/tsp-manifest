@@ -48,7 +48,7 @@ ensure_a_python_exists() {
             return 1
         fi
         printf "Creating symlink: /usr/local/bin/python => ${PYTHON}\n"
-        ln -s "${PYTHON}" /usr/local/bin/python
+        sudo ln -s "${PYTHON}" /usr/local/bin/python
     fi
 }
 
