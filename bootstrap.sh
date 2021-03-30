@@ -19,6 +19,7 @@ install_build_packages() {
         gcc-multilib \
         git-core \
         libsdl1.2-dev \
+        libyaml-dev \
         minicom \
         socat \
         texinfo \
