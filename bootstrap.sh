@@ -62,6 +62,27 @@ install_github_ssh_key() {
     fi
 }
 
+check_for_github_ssh_access() {
+    local URL=ssh://git@github.com/Tampa-Microwave/meta-tm.git
+    local GIT_SSH_COMMAND="ssh -q -o UserKnownHostsFile=/tmp/github_known_hosts"
+
+    ssh-keyscan github.com > /tmp/github_known_hosts 2>/dev/null
+
+    chmod 0 ~/.ssh
+    if ! GIT_SSH_COMMAND="${GIT_SSH_COMMAND}" git ls-remote ${URL} >/dev/null 2>&1; then
+        chmod 700 ~/.ssh
+        printf "You must have a working ssh key loaded that can access \n"
+        printf "the private Tampa Microwave repositories. You should be\n"
+        printf "able to run this command without any interaction:\n"
+        printf "\tgit ls-remote ${URL}\n"
+        printf "\nSSH keys currently loaded:\n"
+        ssh-add -l | sed 's/^/\t/'
+        return 1
+    fi
+    chmod 700 ~/.ssh
+    return 0
+}
+
 install_repo() {
     if ! which repo >/dev/null 2>&1; then
         printf "Installing Google repo tool...\n"
@@ -115,6 +136,7 @@ install_build_packages
 check_ssh_key_loaded
 ensure_a_python_exists
 install_github_ssh_key
+check_for_github_ssh_access
 install_repo
 ensure_git_user_exists
 download_sources
