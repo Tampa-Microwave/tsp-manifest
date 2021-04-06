@@ -10,4 +10,5 @@
       <linkfile src="conf/README.md" dest="README.md"/>
   </project>
   <project name="meta-tm-update.git" path="sources/meta-tm-update" remote="tm"/>
+  <project name="meta-gplv2.git" path="sources/meta-gplv2" remote="yocto"/>
 </manifest>
