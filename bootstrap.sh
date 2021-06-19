@@ -21,6 +21,7 @@ install_build_packages() {
         libsdl1.2-dev \
         libyaml-dev \
         minicom \
+        python2 \
         socat \
         texinfo \
         unzip \
