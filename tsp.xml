@@ -6,7 +6,7 @@
 
   <remote name="tm"    fetch="ssh://git@github.com/Tampa-Microwave"/>
 
-  <project name="meta-tm.git"        path="sources/meta-tm"        remote="tm" revision="zeus">
+  <project name="meta-tm.git"        path="sources/meta-tm"        remote="tm" revision="7a3b5b6ac99d80e423228db486a946693a0dadf4">
       <linkfile src="conf/README.md" dest="README.md"/>
   </project>
   <project name="meta-tm-update.git" path="sources/meta-tm-update" remote="tm" revision="69004891d63a34aa13d352df50d1bdbf05856a14"/>
