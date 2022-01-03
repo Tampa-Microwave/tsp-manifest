@@ -1,6 +1,6 @@
-# Tampa Microwave Yocto (Timmy!) Manifest
+# Tampa Microwave Yocto Manifest
 
-This repository contains the manifest files for Tampa Microwaves' Yocto distribution. It is a fork of Digi Embedded's Yocto distribution and their entire README is included at the end of this document.
+This repository contains the manifest files used by the Google `repo` utilities used with Tampa Microwaves' Yocto distribution. It is a fork of Digi Embedded's Yocto distribution and their entire README is included at the end of this document.
 
 ## Quick Installation
 
