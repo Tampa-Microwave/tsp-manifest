@@ -50,8 +50,6 @@ ensure_a_python_exists() {
             printf "Failed to find python, python3, or python2\n"
             return 1
         fi
-        printf "Creating symlink: /usr/local/bin/python => ${PYTHON}\n"
-        sudo ln -s "${PYTHON}" /usr/local/bin/python
     fi
 }
 
@@ -114,7 +112,7 @@ download_sources() {
     mkdir -p ${SOURCE_DIR}
     pushd ${SOURCE_DIR} >/dev/null 2>&1
     {
-        repo init -v -u https://github.com/Tampa-Microwave/tm-manifest -b zeus -m tsp.xml --depth=1
+        repo init -v -u https://github.com/Tampa-Microwave/tsp-manifest -b tm-zeus -m tsp.xml --depth=1
         repo sync
         popd >/dev/null 2>&1
     }

@@ -24,5 +24,5 @@ You need ssh access to download the Tampa Microwave specific repositories. You n
 This script should do everything up to kicking off the build.
 
 ```shell
-bash -e <(curl -fsSL https://raw.githubusercontent.com/Tampa-Microwave/tm-manifest/zeus/bootstrap.sh)
+bash -e <(curl -fsSL https://raw.githubusercontent.com/Tampa-Microwave/tsp-manifest/tm-zeus/bootstrap.sh)
 ```
