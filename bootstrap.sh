@@ -44,12 +44,10 @@ check_ssh_key_loaded() {
 
 ensure_a_python_exists() {
     # repo needs a "python" executable. some new systems don't have one
-    if ! which python >/dev/null 2>&1; then
-        PYTHON=$(which python3 || which python2)
-        if [ "$PYTHON" == "" ]; then
-            printf "Failed to find python, python3, or python2\n"
-            return 1
-        fi
+    PYTHON=$(which python3 || which python2)
+    if [ "$PYTHON" == "" ]; then
+        printf "Failed to find python3, or python2\n"
+        return 1
     fi
 }
 
@@ -87,7 +85,7 @@ check_for_github_ssh_access() {
 install_repo() {
     if ! which repo >/dev/null 2>&1; then
         printf "Installing Google repo tool...\n"
-        sudo curl -o /usr/local/bin/repo http://commondatastorage.googleapis.com/git-repo-downloads/repo
+        sudo cp repo /usr/local/bin/repo
         sudo chmod a+x /usr/local/bin/repo
     fi
 }
@@ -109,6 +107,7 @@ ensure_git_user_exists() {
 SOURCE_DIR=tm-3.0
 
 download_sources() {
+    pushd .. >/dev/null 2>&1
     mkdir -p ${SOURCE_DIR}
     pushd ${SOURCE_DIR} >/dev/null 2>&1
     {
@@ -116,6 +115,7 @@ download_sources() {
         repo sync
         popd >/dev/null 2>&1
     }
+    popd >/dev/null 2>&1
 }
 
 create_build_directory() {
