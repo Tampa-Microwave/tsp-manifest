@@ -122,7 +122,7 @@ create_build_directory() {
     {
         echo
         echo
-        source ../../${SOURCE_DIR}/sources/meta-tm/conf/tm-env >/dev/null
+        source ../${SOURCE_DIR}/sources/meta-tm/conf/tm-env >/dev/null
         popd >/dev/null 2>&1
     }
 }
