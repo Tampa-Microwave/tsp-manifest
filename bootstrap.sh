@@ -117,14 +117,16 @@ download_sources() {
 }
 
 create_build_directory() {
+    pushd .. >/dev/null 2>&1
     mkdir -p build/ccimx6ulsbc
     pushd build/ccimx6ulsbc >/dev/null 2>&1
     {
         echo
         echo
-        source ../${SOURCE_DIR}/sources/meta-tm/conf/tm-env >/dev/null
+        source ../../${SOURCE_DIR}/sources/meta-tm/conf/tm-env >/dev/null
         popd >/dev/null 2>&1
     }
+    popd >/dev/null 2>&1
 }
 
 tell_next_steps() {
