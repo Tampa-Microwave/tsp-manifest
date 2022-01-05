@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <default sync-j="8" revision="zeus"/>
+  
+  <remote name="tm" fetch="ssh://git@github.com/Tampa-Microwave"/> 
 
-  <remote name="digi"  fetch="git://github.com/digi-embedded"/>
-  <remote name="fsl"   fetch="git://github.com/Freescale"/>
-  <remote name="igl"   fetch="git://github.com/Igalia"/>
-  <remote name="qt5"   fetch="git://github.com/meta-qt5"/>
-  <remote name="swu"   fetch="git://github.com/sbabic"/>
-  <remote name="oe"    fetch="git://git.openembedded.org"/>
-  <remote name="yocto" fetch="git://git.yoctoproject.org"/>
-
-  <project name="meta-digi.git" path="sources/meta-digi" remote="digi" revision="7728d5f458c8f0856d3a2f377476c51117d76d23"></project>
-  <project name="meta-freescale.git" path="sources/meta-freescale" remote="yocto" revision="14f1a630a47375432f93c556927b879b51d84c4e"/>
-  <project name="meta-openembedded.git" path="sources/meta-openembedded" remote="oe" revision="2b5dd1eb81cd08bc065bc76125f2856e9383e98b"/>
-  <project name="meta-qt5.git" path="sources/meta-qt5" remote="qt5" revision="91e6e3b1f5aebd17f895caac3dee32a14630da99"/>
-  <project name="meta-swupdate.git" path="sources/meta-swupdate" remote="swu" revision="8ad6a75e1778cdda671b3d6aea2a9692613020ec"/>
-  <project name="poky.git" path="sources/poky" remote="yocto" revision="d88d62c20d7d8da85f02edb170dae0280624ad7e"/>
+  <project name="meta-digi.git" path="sources/meta-digi" remote="tm" revision="tm-zeus"></project>
+  <project name="meta-freescale.git" path="sources/meta-freescale" remote="tm" revision="tm-zeus"/>
+  <project name="meta-openembedded.git" path="sources/meta-openembedded" remote="tm" revision="tm-zeus"/>
+  <project name="meta-qt5.git" path="sources/meta-qt5" remote="tm" revision="tm-zeus"/>
+  <project name="meta-swupdate.git" path="sources/meta-swupdate" remote="tm" revision="tm-zeus"/>
+  <project name="meta-yocto-bsp.git" path="sources/poky" remote="tm" revision="tm-zeus"/>
 </manifest>
