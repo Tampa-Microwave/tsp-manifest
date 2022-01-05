@@ -83,11 +83,9 @@ check_for_github_ssh_access() {
 }
 
 install_repo() {
-    if ! which repo >/dev/null 2>&1; then
-        printf "Installing Google repo tool...\n"
-        sudo cp repo /usr/local/bin/repo
-        sudo chmod a+x /usr/local/bin/repo
-    fi
+    printf "Installing Google repo tool...\n"
+    sudo cp repo /usr/local/bin/repo
+    sudo chmod a+x /usr/local/bin/repo
 }
 
 ensure_git_user_exists() {
@@ -111,7 +109,7 @@ download_sources() {
     mkdir -p ${SOURCE_DIR}
     pushd ${SOURCE_DIR} >/dev/null 2>&1
     {
-        repo init -v -u https://github.com/Tampa-Microwave/tsp-manifest -b tm-zeus -m tsp.xml --depth=1
+        repo init -v -b tm-zeus -m tsp.xml --depth=1
         repo sync
         popd >/dev/null 2>&1
     }
